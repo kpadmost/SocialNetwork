@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<style>
+  input.ng-invalid {
+    background-color: lightblue;
+  }
+
+  table, th , td {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    padding: 5px;
+  }
+  table tr:nth-child(odd) {
+    background-color: #f1f1f1;
+  }
+  table tr:nth-child(even) {
+    background-color: #ffffff;
+  }
+
+  input.ng-invalid {
+    background-color: pink;
+  }
+  input.ng-valid {
+    background-color: lightgreen;
+  }
+
+</style>
+
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl" align="center">
+<form name="myForm">
+
+  <div class="alert alert-danger" class="col-md-4">
+    <ul>
+      <li ng-show="myForm.loginInput.$pristine || myForm.loginInput.$error.required">
+        e-mail required.
+      </li>
+      <li ng-show="myForm.passInput.$pristine || myForm.passInput.$error.required">
+        password required.
+      </li>
+      <li ng-show="myForm.loginInput.$invalid">
+        e-mail is invalid.
+      </li>
+    </ul>
+  </div>
+
+  <table class="table" align="center">
+    <tr>
+      <td>
+        <p>e-mail: </p>
+      </td>
+      <td>
+        <input name="loginInput" class="form-control" type="email" ng-model="loginData" required>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>password: </p>
+      </td>
+      <td>
+        <input name="passInput" class="form-control" type="password" ng-model="passData" required>
+      </td>
+    </tr>
+  </table>
+<br>
+  <input class="btn btn-success" type="button" value="Sign in" ng-click="validate()">
+  <input class="btn btn-primary" type="button" value="Sign up" ng-click="goRegistration()">
+</form>
+<script src="MyCtrl.js">
+</script>
+
+</body>
+</html>
