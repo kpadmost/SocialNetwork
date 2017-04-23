@@ -1,17 +1,14 @@
 package pw.eiti.pik.entity;
 
 import com.sun.istack.internal.NotNull;
-import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
-import java.util.Date;
 
 /**
  * Created by Konstantin on 14.04.2017.
  */
 @Entity
-@Table(name = "user", schema = "public")
-
+@Table(name = "my_user")
 public class User {
 
     @Column(name = "id")
@@ -102,6 +99,38 @@ public class User {
 
     @Override
     public String toString() {
-        return "id: " + id + " " + firstName + " " + surname;
+        return "id: " + id + " " + getFirstName() + " " + getSurname();
+    }
+
+    public String getCustomPersonalId() {
+        return customPersonalId;
+    }
+
+    public void setCustomPersonalId(String customPersonalId) {
+        this.customPersonalId = customPersonalId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
