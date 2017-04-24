@@ -29,6 +29,7 @@ public class UserService {
     }
 
     public void addPerson(User p) {
+        //TODO: unique person email support
         userDAO.save(p);
 
     }
@@ -45,8 +46,7 @@ public class UserService {
         userDAO.delete(id);
     }
 
-    public long isPersonExsist(User p){
-
+    public long isPersonExist(User p){
         Optional<User> us = StreamSupport.stream(userDAO.findAll().spliterator(), false)
                 .filter(u -> u.getEmail().equals(p.getEmail()) && u.getPassword().equals(p.getPassword()))
                 .findFirst();
