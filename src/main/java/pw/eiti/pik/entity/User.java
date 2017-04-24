@@ -12,6 +12,10 @@ import javax.persistence.*;
 @Table(name = "my_user")
 public class User {
 
+    public long getId() {
+        return id;
+    }
+
     @Column(name = "id")
     @Id @GeneratedValue
     private  long id;

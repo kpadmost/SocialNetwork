@@ -41,4 +41,13 @@ public class UserService {
     public void removePerson(long id) {
         userDAO.delete(id);
     }
+
+    public long isPersonExsist(User p){
+        ArrayList<User> l = new ArrayList<>();
+        userDAO.findAll().forEach(l::add);
+        if(l.stream().anyMatch(usr -> usr.getPassword().equals(p.getPassword()) && usr.getEmail().equals(p.getEmail())))
+            return l.stream().filter(usr -> usr.getPassword().equals(p.getPassword()) && usr.getEmail().equals(p.getEmail())).findFirst().get().getId();
+        else
+            return -1;
+    }
 }

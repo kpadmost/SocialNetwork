@@ -28,6 +28,12 @@ public class RestController {
         userService.getAllPersons().stream().forEach(System.out::println);
     }
 
+    @RequestMapping(method = RequestMethod.PUT, value = "/login")
+    public long checkUser(@RequestBody User user){
+        return userService.isPersonExsist(user);
+
+    }
+
     @RequestMapping(method = RequestMethod.PUT, value = "/users/{id}")
     public void updateUser(@RequestBody User user/*, @PathVariable String id*/){
         userService.updatePerson(user);

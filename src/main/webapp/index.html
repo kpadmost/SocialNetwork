@@ -35,50 +35,65 @@
     background-color: lightgreen;
   }
 
+  div {
+    padding-left: 25%;
+    padding-right: 25%;
+  }
+
 </style>
 
 <body>
 
 <div ng-app="myApp" ng-controller="myCtrl" align="center">
 <form name="myForm">
-
-  <div class="alert alert-danger" class="col-md-4">
+    <br>
+  <div class="alert alert-danger" ng-show="alertdangershow = (emailreq1 || passreq1 || emailvalid1)" class="col-md-4">
     <ul>
-      <li ng-show="myForm.loginInput.$pristine || myForm.loginInput.$error.required">
-        e-mail required.
+      <li ng-show="emailreq1 = (myForm.loginInput.$pristine || myForm.loginInput.$error.required)">
+        E-mail required.
       </li>
-      <li ng-show="myForm.passInput.$pristine || myForm.passInput.$error.required">
-        password required.
+      <li ng-show="emailvalid1 = myForm.loginInput.$invalid && !emailreq1">
+        E-mail is invalid.
       </li>
-      <li ng-show="myForm.loginInput.$invalid">
-        e-mail is invalid.
+      <li ng-show="passreq1 = myForm.passInput.$pristine || myForm.passInput.$error.required">
+        Password required.
       </li>
     </ul>
   </div>
 
+  <div class=" alert alert-success" ng-show="userFound">
+      <strong>Login successful.</strong>
+  </div>
+
+  <div class=" alert alert-danger" ng-show="userFindError">
+        <strong>User not found.</strong>
+  </div>
+
+
   <table class="table" align="center">
     <tr>
       <td>
-        <p>e-mail(test_kost_cool1): </p>
+        <p>E-mail: </p>
       </td>
       <td>
 
-        <input name="loginInput" class="form-control" type="email" ng-model="loginData" required>
+        <input name="loginInput" class="form-control" type="email" ng-model="user.email" required>
       </td>
     </tr>
     <tr>
       <td>
-        <p>password: </p>
+        <p>Password: </p>
       </td>
       <td>
-        <input name="passInput" class="form-control" type="password" ng-model="passData" required>
+        <input name="passInput" class="form-control" type="password" ng-model="user.password" required>
       </td>
     </tr>
   </table>
 <br>
-  <input class="btn btn-success" type="button" value="Sign in" ng-click="validate()">
+  <input class="btn btn-success" type="button" value="Sign in" ng-disabled="!(!emailvalid1 && !passreq1)" ng-click="goUser()">
   <input class="btn btn-primary" type="button" value="Sign up" ng-click="goRegistration()">
 </form>
+</div>
 <script src="MyCtrl.js">
 </script>
 

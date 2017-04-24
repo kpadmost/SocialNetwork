@@ -35,29 +35,50 @@
         background-color: lightgreen;
     }
 
+    div {
+        padding-left: 25%;
+        padding-right: 25%;
+    }
+
 </style>
 
 <body>
 
 <div ng-app="myApp" ng-controller="myCtrl" align="center">
-    <form name="myForm">
-
-        <div class="alert alert-danger" class="col-md-4">
+    <form name="myForm" align="center">
+        <br>
+        <div class="alert alert-danger" ng-show="alertdangershow = (namereq || surnamereq || emailreq || passreq || emailvalid)" class="col-md-4">
             <ul>
-                <li ng-show="myForm.loginInput.$pristine || myForm.loginInput.$error.required">
-                    e-mail required.
+                <li ng-show="namereq = (myForm.nameInput.$pristine || myForm.nameInput.$error.required)">
+                    Name required.
                 </li>
-                <li ng-show="myForm.passInput.$pristine || myForm.passInput.$error.required">
-                    password required.
+                <li ng-show="surnamereq = (myForm.surnameInput.$pristine || myForm.surnameInput.$error.required)">
+                    Surname required.
                 </li>
-                <li ng-show="myForm.nameInput.$pristine || myForm.nameInput.$error.required">
-                    password required.
+                <li ng-show="emailreq = (myForm.loginInput.$pristine || myForm.loginInput.$error.required)">
+                    E-mail required.
                 </li>
-                <li ng-show="myForm.surnameInput.$pristine || myForm.surnameInput.$error.required">
-                    password required.
+                <li ng-show="emailvalid = (myForm.loginInput.$invalid && !emailreq)">
+                    E-mail is invalid.
                 </li>
-                <li ng-show="myForm.loginInput.$invalid">
-                    e-mail is invalid.
+                <li ng-show="passreq = (myForm.passInput.$pristine || myForm.passInput.$error.required)">
+                    Password required.
+                </li>
+            </ul>
+        </div>
+
+        <div class="alert alert-info" ng-show="alertinfoshow = (!alertdangershow && !finishClicked)">
+            <ul>
+                <li>
+                    Click "Finish" to continue registration.
+                </li>
+            </ul>
+        </div>
+
+        <div class="alert alert-success" ng-show="finishClicked">
+            <ul>
+                <li>
+                    Registration complete.
                 </li>
             </ul>
         </div>
@@ -73,7 +94,7 @@
             </tr>
             <tr>
                 <td>
-                    <p>Last name: </p>
+                    <p>Surname: </p>
                 </td>
                 <td>
                     <input name="surnameInput" class="form-control" type="text" ng-model="user.surname" required>
@@ -81,7 +102,7 @@
             </tr>
             <tr>
                 <td>
-                    <p>e-mail: </p>
+                    <p>E-mail: </p>
                 </td>
                 <td>
                     <input name="loginInput" class="form-control" type="email" ng-model="user.email" required>
@@ -89,7 +110,7 @@
             </tr>
             <tr>
                 <td>
-                    <p>password: </p>
+                    <p>Password: </p>
                 </td>
                 <td>
                     <input name="passInput" class="form-control" type="password" ng-model="user.password" required>
@@ -97,7 +118,9 @@
             </tr>
         </table>
         <br>
-        <input class="btn btn-success" type="button" value="Finish" ng-click="createUser()">
+        <input class="btn btn-success" type="button" ng-disabled="!alertinfoshow" value="Finish" ng-click="createUser()">
+    </form>
+</div>
 
     <script src="MyCtrl.js">
     </script>
