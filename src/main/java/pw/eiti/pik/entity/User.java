@@ -1,5 +1,6 @@
 package pw.eiti.pik.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.internal.NotNull;
 
 import javax.persistence.*;
@@ -17,10 +18,12 @@ public class User {
 
     @Column(name = "first_name", length = 30)
     @NotNull
+    @JsonProperty("firstName")
     private String firstName;
 
     @Column(name = "surname", length = 30)
     @NotNull
+    @JsonProperty("surname")
     private String surname;
 
     @Column(name = "birthplace", length = 50)
@@ -44,10 +47,12 @@ public class User {
 
     @Column(name = "email")
     @NotNull
+    @JsonProperty("email")
     private String email;
 
     @Column(name = "password")
     @NotNull
+    @JsonProperty("password")
     private String password;
     public String getFirstName() {
         return firstName;

@@ -20,9 +20,9 @@ app.directive( 'goClick', function ( $location ) {
 /*ADDRESSES TO CHANGE*/
 
 app.controller('myCtrl', function($scope, $http, $location, $q) {
-    var REST_SERVICE_URI = 'http://localhost:63342/AngularApp/app/';
+    var REST_SERVICE_URI = 'http://localhost:8080/users';
 
-    $scope.user = {loginData: "", passData: "", nameData: "", surnameData: ""};
+    $scope.user = {firstName: "", surname: "", email: "", password: ""};
 
 
     $scope.createUser = function(user)  {
@@ -46,14 +46,14 @@ app.controller('myCtrl', function($scope, $http, $location, $q) {
     }
 
     $scope.goLogin = function() {
-        window.location.href="http://localhost:63342/AngularApp/app/index.html";
+        window.location.href="http://localhost:8080/index.html";
     }
 
     $scope.goRegistration = function() {
-        window.location.href="http://localhost:63342/AngularApp/app/registration.html";
+        window.location.href="http://localhost:8080/registration.html";
     }
 
-    $http.get('http://localhost:63342/AngularApp/app/registration.html').
+    $http.get('http://localhost:8080/registration.html').
     then(function(response) {
         $scope.greeting = response.data;
     });

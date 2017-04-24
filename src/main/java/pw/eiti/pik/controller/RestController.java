@@ -1,10 +1,7 @@
 package pw.eiti.pik.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import pw.eiti.pik.entity.User;
 import pw.eiti.pik.service.UserService;
 
@@ -25,9 +22,10 @@ public class RestController {
         return userService.findPersonById(tmp);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/users")
+    @RequestMapping(method = RequestMethod.POST, value = "/users")
     public void addUser(@RequestBody User user){
         userService.addPerson(user);
+        userService.getAllPersons().stream().forEach(System.out::println);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/users/{id}")

@@ -25,7 +25,7 @@ public class SocialnetworkApplication {
 			u.setEmail("asd@gasd.com");
 			u.setPassword("12345");
 			serv.addPerson(u);
-			serv.getAllPersons().forEach(pr -> System.out.println(pr));
+			//serv.getAllPersons().forEach(pr -> System.out.println(pr));
 
 		};
 
