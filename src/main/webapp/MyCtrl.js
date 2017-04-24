@@ -25,24 +25,24 @@ app.controller('myCtrl', function($scope, $http, $location, $q) {
     $scope.user = {firstName: "", surname: "", email: "", password: ""};
 
 
-    $scope.createUser = function(user)  {
-        var deferred = $q.defer();
+    $scope.createUser = function()  {
+       // var deferred = $q.defer();
         $http.put(REST_SERVICE_URI, $scope.user)
             .then(
                 function (response) {
 
-                    deferred.resolve(response.data);
+                    //deferred.resolve(response.data);
 
                     $scope.goLogin();
                 },
                 function(errResponse){
                     console.error('Error while creating User');
-                    deferred.reject(errResponse);
+                   // deferred.reject(errResponse);
 
-                    $scope.goLogin();
+                    //$scope.goLogin();
                 }
             );
-        return deferred.promise;
+        //return deferred.promise;
     }
 
     $scope.goLogin = function() {
