@@ -27,6 +27,8 @@ app.controller('myCtrl', function($scope, $timeout, $http, $location, $q) {
     $scope.signInClicked = false;
     $scope.userFound = false;
     $scope.userFindError = false;
+    $scope.loginData = "";
+    $scope.passData = "";
 
     $scope.createUser = function()  {
         $scope.finishClicked = true;
@@ -54,12 +56,13 @@ app.controller('myCtrl', function($scope, $timeout, $http, $location, $q) {
 
         $scope.signInClicked = true;
 
-        $http.get(REST_SERVICE_URI)
+        $http.get(REST_SERVICE_URI + $scope.loginData)
             .then(
                 function (response) {
                     $scope.userFound = true;
                     $scope.userFindError = false;
                     $timeout(deferred.resolve(response.data), 3000 );
+                    window.location.href="http://localhost:8080/personalPage.html";
                 },
                 function(errResponse){
                     $scope.userFound = false;
