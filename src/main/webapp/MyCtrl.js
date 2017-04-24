@@ -61,8 +61,8 @@ app.controller('myCtrl', function($scope, $timeout, $http, $location, $q) {
                 function (response) {
                     $scope.userFound = true;
                     $scope.userFindError = false;
-                    $timeout(deferred.resolve(response.data), 3000 );
-                    window.location.href="http://localhost:8080/personalPage.html";
+                    deferred.resolve(response.data);
+                    $timeout(goPersonalPage(), 3000 );
                 },
                 function(errResponse){
                     $scope.userFound = false;
@@ -76,6 +76,10 @@ app.controller('myCtrl', function($scope, $timeout, $http, $location, $q) {
 
     $scope.goLogin = function() {
         window.location.href="http://localhost:8080/index.html";
+    }
+
+    $scope.goPersonalPage = function() {
+        window.location.href="http://localhost:8080/personalPage.html";
     }
 
     $scope.goRegistration = function() {
