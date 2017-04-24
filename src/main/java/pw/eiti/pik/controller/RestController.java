@@ -30,7 +30,7 @@ public class RestController {
 
     @RequestMapping(method = RequestMethod.PUT, value = "/login")
     public long checkUser(@RequestBody User user){
-        return userService.isPersonExsist(user);
+        return userService.isPersonExist(user);
 
     }
 
