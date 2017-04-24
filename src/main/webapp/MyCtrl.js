@@ -19,12 +19,14 @@ app.directive( 'goClick', function ( $location ) {
 
 /*ADDRESSES TO CHANGE*/
 
-app.controller('myCtrl', function($scope, $http, $location, $q) {
+app.controller('myCtrl', function($scope, $timeout, $http, $location, $q) {
     var REST_SERVICE_URI = 'http://localhost:8080/users';
 
     $scope.user = {firstName: "", surname: "", email: "", password: ""};
     $scope.finishClicked = false;
+    $scope.signInClicked = false;
     $scope.userFound = false;
+    $scope.userFindError = false;
 
     $scope.createUser = function()  {
         $scope.finishClicked = true;
@@ -49,7 +51,23 @@ app.controller('myCtrl', function($scope, $http, $location, $q) {
 
     $scope.goUser = function() {
         var deferred = $q.defer();
-        //TODO
+
+        $scope.signInClicked = true;
+
+        $http.get(REST_SERVICE_URI)
+            .then(
+                function (response) {
+                    $scope.userFound = true;
+                    $scope.userFindError = false;
+                    $timeout(deferred.resolve(response.data), 3000 );
+                },
+                function(errResponse){
+                    $scope.userFound = false;
+                    $scope.userFindError = true;
+                    console.error('Error while fetching Users');
+                    deferred.reject(errResponse);
+                }
+            );
         return deferred.promise;
     }
 
