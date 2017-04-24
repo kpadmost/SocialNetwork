@@ -27,7 +27,7 @@ app.controller('myCtrl', function($scope, $http, $location, $q) {
 
     $scope.createUser = function(user)  {
         var deferred = $q.defer();
-        $http.post(REST_SERVICE_URI, user)
+        $http.put(REST_SERVICE_URI, $scope.user)
             .then(
                 function (response) {
 

@@ -22,7 +22,7 @@ public class RestController {
         return userService.findPersonById(tmp);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/users")
+    @RequestMapping(method = RequestMethod.PUT, value = "/users")
     public void addUser(@RequestBody User user){
         userService.addPerson(user);
         userService.getAllPersons().stream().forEach(System.out::println);
