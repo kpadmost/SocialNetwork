@@ -35,7 +35,7 @@ public class RestController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/users/{id}")
-    public void updateUser(@RequestBody User user/*, @PathVariable String id*/){
+    public void updateUser(@RequestBody User user){
         userService.updatePerson(user);
     }
 

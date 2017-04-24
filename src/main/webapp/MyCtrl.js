@@ -50,13 +50,7 @@ app.controller('myCtrl', function($scope, $timeout, $http, $location, $q) {
                     if(response.data!=-1) {
                         $scope.userFound = true;
                         $scope.userFindError = false;
-                        window.location.href=REST_SERVICE_URI+"users/"+response.data;
-                        /*$http.get(REST_SERVICE_URI+"users/"+response.data)
-                            .then(
-                                function (response) {
-                                    $scope.goPersonalPage(response.data);
-                                }
-                            );*/
+                        window.location.href=REST_SERVICE_URI+"users/"+response.data
                     }
                     else{
                         $scope.userFound = false;
@@ -68,9 +62,6 @@ app.controller('myCtrl', function($scope, $timeout, $http, $location, $q) {
             );
     }
 
-    /*$scope.getData = function () {
-
-    }*/
     $scope.goLogin = function() {
         window.location.href="http://localhost:8080/index.html";
     }
