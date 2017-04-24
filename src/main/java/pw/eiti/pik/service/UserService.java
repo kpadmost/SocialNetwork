@@ -8,6 +8,9 @@ import pw.eiti.pik.entity.User;
 
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 /**
  * Created by Konstantin on 14.04.2017.
@@ -26,6 +29,7 @@ public class UserService {
     }
 
     public void addPerson(User p) {
+        //TODO: unique person email support
         userDAO.save(p);
 
     }
@@ -42,12 +46,10 @@ public class UserService {
         userDAO.delete(id);
     }
 
-    public long isPersonExsist(User p){
-        ArrayList<User> l = new ArrayList<>();
-        userDAO.findAll().forEach(l::add);
-        if(l.stream().anyMatch(usr -> usr.getPassword().equals(p.getPassword()) && usr.getEmail().equals(p.getEmail())))
-            return l.stream().filter(usr -> usr.getPassword().equals(p.getPassword()) && usr.getEmail().equals(p.getEmail())).findFirst().get().getId();
-        else
-            return -1;
+    public long isPersonExist(User p){
+        Optional<User> us = StreamSupport.stream(userDAO.findAll().spliterator(), false)
+                .filter(u -> u.getEmail().equals(p.getEmail()) && u.getPassword().equals(p.getPassword()))
+                .findFirst();
+        return us.isPresent() ? us.get().getId() : -1;
     }
 }
