@@ -23,9 +23,11 @@ app.controller('myCtrl', function($scope, $http, $location, $q) {
     var REST_SERVICE_URI = 'http://localhost:8080/users';
 
     $scope.user = {firstName: "", surname: "", email: "", password: ""};
+    $scope.finishClicked = false;
+    $scope.userFound = false;
 
-
-    $scope.createUser = function(user)  {
+    $scope.createUser = function()  {
+        $scope.finishClicked = true;
         var deferred = $q.defer();
         $http.put(REST_SERVICE_URI, $scope.user)
             .then(
@@ -42,6 +44,12 @@ app.controller('myCtrl', function($scope, $http, $location, $q) {
                     $scope.goLogin();
                 }
             );
+        return deferred.promise;
+    }
+
+    $scope.goUser = function() {
+        var deferred = $q.defer();
+        //TODO
         return deferred.promise;
     }
 
